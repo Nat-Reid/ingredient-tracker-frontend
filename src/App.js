@@ -5,6 +5,7 @@ import { getUser } from './index.js'
 
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import Login from './components/Login'
+import Signup from './components/Signup'
 import Home from './containers/Home'
 
 class App extends Component{
@@ -13,6 +14,21 @@ class App extends Component{
       getUser()
     }
   }
+
+  protectedPath(component){
+    if (this.props.user){
+      return component
+    }else{
+      return (
+        <div className="Protected">
+          <p> You must me logged in to view this content</p>
+          <a href="/login">log in</a>
+          <a href="/signup">sign up</a>
+        </div>
+      )
+    }
+  }
+
   //deal with user better later
   render(){
     return (
@@ -20,14 +36,16 @@ class App extends Component{
         <div>
           <Switch>
             <Route exact path="/" component={() => !this.props.user ? <Redirect to="/login"/> : <Redirect to="/home"/>} />
-            <Route path="/login" component={() => this.props.user ? <Redirect to="/home"/> : <Login/>}/>
-            <Route path="/home" component={() => !this.props.user ? <Redirect to="/login"/> : <Home/>}/>
+            <Route path="/signup" component={Signup}/>
+            <Route path="/login" component={Login}/>
+            <Route path="/home" component={() => this.protectedPath(<Home/>)}/>
           </Switch>
         </div>
       </Router>
     )
   }
 }
+
 
 const mapStateToProps = ({userReducer}) => {
   return {...userReducer}

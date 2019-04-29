@@ -4,13 +4,16 @@ import { setUser } from '../Actions.js'
 import { setToken } from '../index.js'
 import { Redirect } from 'react-router-dom'
 
-class Login extends Component {
+
+class Signup extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       username: '',
+      name: '',
       password: '',
+      confirmPassword: '',
       message: '',
       redirect: false
     };
@@ -24,25 +27,32 @@ class Login extends Component {
 
   handleSubmit = (ev) => {
     ev.preventDefault()
-    let valid = this.state.username !== "" && this.state.password !== ""
-    if(valid){this.handleLogin(this.state)}
-    else{this.setState({message: "please fill in a username and password"})}
+    let notEmpty = this.state.username !== "" && this.state.password !== ""
+    let valid = this.state.password === this.state.confirmPassword
+    if(valid && notEmpty){
+      this.handleSignup(this.state)
+    }else if (!notEmpty){
+      this.setState({message: "please fill in a username and password"})
+    }else if (!valid){
+      this.setState({message: "passwords must match"})
+    }
   }
 
-  handleLogin = ({username, password}) => {
-    fetch(`http://localhost:3000/login`, {
+  handleSignup = ({username, password, name}) => {
+    fetch(`http://localhost:3000/users`, {
       method: 'POST',
     	headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json'
     	},
-    	body: JSON.stringify({username, password})
+    	body: JSON.stringify({user: {username, password, name}})
     })
     .then(response => response.json())
     .then(this.handleResponse);
   }
 
   handleResponse = json => {
+    console.log(json)
     if (json.jwt){
       setToken(json.jwt)
       this.props.setUser(json.user)
@@ -54,11 +64,11 @@ class Login extends Component {
 
   render() {
     if (this.state.redirect){
-      return <Redirect to='/home' />
+      return <Redirect to='/addIngredients' />
     }
     return (
       <Fragment>
-        <div className="login-message">{this.state.message}</div>
+        <div className="signup-message">{this.state.message}</div>
         <form onSubmit={this.handleSubmit}>
           <div>
             <label>
@@ -72,16 +82,36 @@ class Login extends Component {
           </div>
           <div>
             <label>
+              Name
+              <input id="name"
+                name="name"
+                type="text"
+                value={this.state.name}
+                onChange={this.handleChange}/>
+            </label>
+          </div>
+          <div>
+            <label>
               Password
               <input id="password"
                 name="password"
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.handleChange}/>
             </label>
           </div>
           <div>
-            <button type="submit">Log in</button>
+            <label>
+              Confirm Password
+              <input id="confirmPassword"
+                name="confirmPassword"
+                type="password"
+                value={this.state.confirmPassword}
+                onChange={this.handleChange}/>
+            </label>
+          </div>
+          <div>
+            <button type="submit">Sign up</button>
           </div>
         </form>
       </Fragment>
@@ -95,4 +125,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(null,mapDispatchToProps)(Login);
+export default connect(null,mapDispatchToProps)(Signup);
