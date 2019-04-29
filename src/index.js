@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
 import reducer from './reducers/mainReducer.js'
 
 import App from './App'
@@ -24,7 +25,6 @@ export function setToken(token){
 
 export function getUser(){
   fetch(`${API_URL}/profile`, {
-    method: 'GET',
     headers: {
       Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`
     }
@@ -36,6 +36,25 @@ export function getUser(){
     store.dispatch({
       type: "SET_USER",
       payload: json
+    })
+    getUserIngredients()
+  });
+}
+
+export function getUserIngredients(){
+  fetch(`${API_URL}/user_ingredients`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`
+    }
+  })
+  .then(response => {
+    return response.json()
+  })
+  .then(json => {
+    console.log(json)
+    store.dispatch({
+      type: "SET_USER_INGREDIENTS",
+      payload: {userIngredients: json}
     })
   });
 }

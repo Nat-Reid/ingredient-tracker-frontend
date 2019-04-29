@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 const Home = props => {
   return (
-    <div>
+    <div className="HomePage">
       HI {props.user ? props.user.name : "SOMETHING WENT WRONG, YOU DON'T EXIST"} <br/>
       WELCOME TO FOOD APP <br/>
       HERE IS YOUR JWT {localStorage.getItem("IngredientTrackerToken")} <br/>

@@ -19,6 +19,7 @@ class App extends Component{
       <Router>
         <div>
           <Switch>
+            <Route exact path="/" component={() => !this.props.user ? <Redirect to="/login"/> : <Redirect to="/home"/>} />
             <Route path="/login" component={() => this.props.user ? <Redirect to="/home"/> : <Login/>}/>
             <Route path="/home" component={() => !this.props.user ? <Redirect to="/login"/> : <Home/>}/>
           </Switch>
@@ -29,7 +30,6 @@ class App extends Component{
 }
 
 const mapStateToProps = ({userReducer}) => {
-  console.log("user reducer", {...userReducer})
   return {...userReducer}
 }
 //

@@ -4,3 +4,10 @@ export const setUser = user => {
     payload: {user}
   }
 }
+
+export const setUserIngredients = userIngredients => {
+  return {
+    type: "SET_USER_INGREDIENTS",
+    payload: {userIngredients}
+  }
+}
