@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { setUser, setJWT } from '../Actions.js'
+import { setUser } from '../Actions.js'
+import { setToken } from '../index.js'
 
 class Login extends Component {
   constructor(props) {
@@ -41,7 +42,7 @@ class Login extends Component {
 
   handleResponse = json => {
     if (json.jwt){
-      localStorage.setItem("IngredientTrackerToken", json.jwt)
+      setToken(json.jwt)
       this.props.setUser(json.user)
     }else{
       this.setState({message: json.message})

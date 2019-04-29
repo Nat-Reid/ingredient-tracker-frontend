@@ -12,7 +12,7 @@ const Home = props => {
     );
 }
 
-const mapStateToProps = ({userReducer,authReducer}) => {
+const mapStateToProps = ({userReducer}) => {
   return {...userReducer}
 }
 

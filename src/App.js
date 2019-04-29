@@ -1,24 +1,42 @@
 import React from 'react';
+import { Component } from 'react'
 import { connect } from 'react-redux'
+import { getUser } from './index.js'
+
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import Login from './components/Login'
-import Home from './components/Home'
+import Home from './containers/Home'
 
-const App = props => {
-  return (
-    <Router>
-      <div>
-        <Switch>
-          <Route path="/login" component={() => props.user ? <Redirect to="/home"/> : <Login/>}/>
-          <Route path="/home" component={() => !props.user ? <Redirect to="/login"/> : <Home/>}/>
-        </Switch>
-      </div>
-    </Router>
-  )
+class App extends Component{
+  componentDidMount(){
+    if (!this.props.user && localStorage.getItem("IngredientTrackerToken")){
+      getUser()
+    }
+  }
+  //deal with user better later
+  render(){
+    return (
+      <Router>
+        <div>
+          <Switch>
+            <Route path="/login" component={() => this.props.user ? <Redirect to="/home"/> : <Login/>}/>
+            <Route path="/home" component={() => !this.props.user ? <Redirect to="/login"/> : <Home/>}/>
+          </Switch>
+        </div>
+      </Router>
+    )
+  }
 }
 
 const mapStateToProps = ({userReducer}) => {
+  console.log("user reducer", {...userReducer})
   return {...userReducer}
 }
+//
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     setUser: (user) => dispatch(setUser(user))
+//   }
+// }
 
 export default connect(mapStateToProps)(App)
