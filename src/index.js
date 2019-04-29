@@ -51,7 +51,7 @@ export function getUserIngredients(){
     return response.json()
   })
   .then(json => {
-    console.log(json)
+    console.log("user ingredients from fetch", json)
     store.dispatch({
       type: "SET_USER_INGREDIENTS",
       payload: {userIngredients: json}

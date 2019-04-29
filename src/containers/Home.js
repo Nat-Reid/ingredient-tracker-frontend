@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux'
+
+import IngredientList from './IngredientList.js'
+import MealForm from './MealForm.js'
 
 const Home = props => {
   return (
     <div className="HomePage">
-      HI {props.user ? props.user.name : "SOMETHING WENT WRONG, YOU DON'T EXIST"} <br/>
-      WELCOME TO FOOD APP <br/>
-      HERE IS YOUR JWT {localStorage.getItem("IngredientTrackerToken")} <br/>
-      HAVE FUN KEEPING YOUR INFO SAFE
+      <IngredientList />
+      <MealForm />
     </div>
     );
 }
