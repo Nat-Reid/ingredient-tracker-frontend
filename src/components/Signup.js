@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { setUser } from '../Actions.js'
 import { setToken } from '../index.js'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 
 class Signup extends Component {
@@ -114,6 +114,7 @@ class Signup extends Component {
             <button type="submit">Sign up</button>
           </div>
         </form>
+        <Link to='/login'>Login</Link>
       </Fragment>
     );
   }

@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { setUser, setUserIngredients } from './Actions.js'
 import { deleteToken } from './index.js'
 
-
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'

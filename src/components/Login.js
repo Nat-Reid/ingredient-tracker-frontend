@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { setUser } from '../Actions.js'
 import { setToken } from '../index.js'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 class Login extends Component {
   constructor(props) {
@@ -77,7 +77,7 @@ class Login extends Component {
               Password
               <input id="password"
                 name="password"
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.handleChange}/>
             </label>
@@ -86,6 +86,7 @@ class Login extends Component {
             <button type="submit">Log in</button>
           </div>
         </form>
+        <Link to='/signup'>Signup</Link>
       </Fragment>
     );
   }
