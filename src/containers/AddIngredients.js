@@ -2,13 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import IngredientList from './IngredientList.js'
-import MealForm from '../components/MealForm.js'
+import AddIngredientForm from '../components/AddIngredientForm.js'
 
-const Home = props => {
+const AddIngredients = props => {
   return (
-    <div className="HomePage">
+    <div className="AddIngredientsPage">
       <IngredientList />
-      <MealForm />
+      <AddIngredientForm />
     </div>
     );
 }
@@ -17,4 +17,4 @@ const mapStateToProps = ({userReducer}) => {
   return {...userReducer}
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps)(AddIngredients)

@@ -8,6 +8,7 @@ import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-rout
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Home from './containers/Home'
+import AddIngredients from './containers/AddIngredients'
 
 class App extends Component{
   componentDidMount() {
@@ -39,6 +40,7 @@ class App extends Component{
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
             <Route path="/home" component={() => this.protectedPath(<Home/>)}/>
+            <Route path="/addIngredients" component={() => this.protectedPath(<AddIngredients/>)}/>
           </Switch>
         </div>
       </Router>
