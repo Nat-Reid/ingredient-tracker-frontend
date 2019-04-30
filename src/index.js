@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import { Provider } from 'react-redux'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk';
 import reducer from './reducers/mainReducer.js'
 
@@ -13,50 +13,14 @@ import App from './App'
 
 ////////////////////////////////////////////////////////////////
 
-const store = createStore(reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
-
-const BASE_URL = "http://localhost:3001/"
-const API_URL = "http://localhost:3000"
+const store = createStore(reducer, compose(applyMiddleware(thunk),   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()))
 
 export function setToken(token){
   localStorage.setItem("IngredientTrackerToken", token)
 }
 
-export function getUser(){
-  fetch(`${API_URL}/profile`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`
-    }
-  })
-  .then(response => {
-    return response.json()
-  })
-  .then(json => {
-    store.dispatch({
-      type: "SET_USER",
-      payload: json
-    })
-    getUserIngredients()
-  });
-}
-
-export function getUserIngredients(){
-  fetch(`${API_URL}/user_ingredients`, {
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`
-    }
-  })
-  .then(response => {
-    return response.json()
-  })
-  .then(json => {
-    console.log("user ingredients from fetch", json)
-    store.dispatch({
-      type: "SET_USER_INGREDIENTS",
-      payload: {userIngredients: json}
-    })
-  });
+export function deleteToken(){
+  localStorage.removeItem("IngredientTrackerToken")
 }
 
 ReactDOM.render(<Provider store={store}><App/></Provider>, document.getElementById('root'));

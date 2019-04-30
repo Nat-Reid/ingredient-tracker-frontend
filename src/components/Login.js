@@ -43,10 +43,12 @@ class Login extends Component {
   }
 
   handleResponse = json => {
+    console.log("THIS IS LOGIN RESPONSE", json)
     if (json.jwt){
       setToken(json.jwt)
+      console.log(localStorage.getItem('IngredientTrackerToken'))
       this.props.setUser(json.user)
-      this.setState({redirect: true})
+      this.setState({redirect: true}, () => console.log(this.state))
     }else{
       this.setState({message: json.message})
     }
