@@ -40,7 +40,7 @@ class App extends Component{
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
             <Route path="/home" component={() => this.protectedPath(<Home/>)}/>
-            <Route path="/addIngredients" component={() => this.protectedPath(<AddIngredients/>)}/>
+            <Route path="/add-ingredients" component={() => this.protectedPath(<AddIngredients/>)}/>
           </Switch>
         </div>
       </Router>

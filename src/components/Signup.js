@@ -64,7 +64,7 @@ class Signup extends Component {
 
   render() {
     if (this.state.redirect){
-      return <Redirect to='/addIngredients' />
+      return <Redirect to='/add-ingredients' />
     }
     return (
       <Fragment>
