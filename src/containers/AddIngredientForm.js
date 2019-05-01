@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FindIngredientForm from './FindIngredientForm.js'
+import FindIngredientForm from '../components/FindIngredientForm.js'
 import { connect } from 'react-redux'
 
 class AddIngredientForm extends Component{

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux'
 
 import UserIngredientList from './UserIngredientList.js'
-import AddIngredientForm from '../components/AddIngredientForm.js'
+import AddIngredientForm from './AddIngredientForm.js'
 
 const AddIngredients = props => {
   return (
