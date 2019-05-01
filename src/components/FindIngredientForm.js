@@ -13,10 +13,14 @@ class FindIngredientForm extends Component{
       [ev.target.name]: ev.target.value
     })
   }
-  
+
+  handleSubmit = (ev) => {
+    ev.preventDefault()
+  }
+
   render() {
     return (
-      <form>
+      <form onSubmit={this.handleSubmit}>
         <div>
           <label>
             Search For ingredients
@@ -26,6 +30,9 @@ class FindIngredientForm extends Component{
               value={this.state.ingredient}
               onChange={this.handleChange}/>
           </label>
+          <div>
+            <button type="submit">Find Ingredients</button>
+          </div>
         </div>
       </form>
     );
