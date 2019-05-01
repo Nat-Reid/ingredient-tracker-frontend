@@ -1,7 +1,7 @@
 import React from 'react';
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { setUser, setUserIngredients } from './Actions.js'
+import { getUser, getUserIngredients } from './Actions.js'
 import { deleteToken } from './index.js'
 
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
@@ -12,7 +12,7 @@ import AddIngredients from './containers/AddIngredients'
 
 class App extends Component{
   componentDidMount() {
-    this.props.setUser()
+    this.props.getUser()
   }
 
   protectedPath(component){
@@ -56,8 +56,8 @@ const mapStateToProps = ({userReducer}) => {
 const mapDispatchToProps = dispatch => {
   console.log(dispatch)
   return {
-    setUser: () => dispatch(setUser()),
-    setUserIngredients: () => dispatch(setUserIngredients())
+    getUser: () => dispatch(getUser()),
+    getUserIngredients: () => dispatch(getUserIngredients())
   }
 }
 

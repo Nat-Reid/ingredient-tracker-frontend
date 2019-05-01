@@ -20,21 +20,28 @@ function jwtFetch(method, endpoint, callback){
   .catch(console.log)
 }
 
-export const setUser = () => {
+export const getUser = () => {
   return (dispatch) => {
-    dispatch(setUserIngredients())
+    dispatch(getUserIngredients())
     dispatch({type: 'START_USER_REQUEST'})
     return jwtFetch("GET","profile", json => dispatch({type: 'SET_USER', payload: json.user}))
     // {user: {username: "", name: ""}}
   };
 }
 
-export const setUserIngredients = () => {
+export const getUserIngredients = () => {
   return (dispatch) => {
     dispatch({type: 'START_USER_INGREDIENT_REQUEST'})
     return jwtFetch("GET","user_ingredients", json => dispatch({type: 'SET_USER_INGREDIENTS', payload: json}))
     // [{name: "", expiration_date: ...}, {}, {}]
   };
+}
+
+export const findIngredient = (searchString) => {
+  return (dispatch) => {
+    dispatch({type: 'START_INGREDIENT_REQUEST'})
+    return jwtFetch("GET",`find-ingredients/${searchString}`, ingredients => dispatch({type: 'SET_INGREDIENTS', payload: ingredients}))
+  }
 }
 
 export const deleteUserIngredient = id => {

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { setUser } from '../Actions.js'
+import { getUser } from '../Actions.js'
 import { setToken } from '../index.js'
 import { Redirect, Link } from 'react-router-dom'
 
@@ -47,7 +47,7 @@ class Login extends Component {
     if (json.jwt){
       setToken(json.jwt)
       console.log(localStorage.getItem('IngredientTrackerToken'))
-      this.props.setUser(json.user)
+      this.props.getUser(json.user)
       this.setState({redirect: true}, () => console.log(this.state))
     }else{
       this.setState({message: json.message})
@@ -94,7 +94,7 @@ class Login extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUser: (user) => dispatch(setUser(user))
+    getUser: (user) => dispatch(getUser(user))
   }
 }
 

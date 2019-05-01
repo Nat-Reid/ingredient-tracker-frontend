@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
-import { setUser } from '../Actions.js'
+import { getUser } from '../Actions.js'
 import { setToken } from '../index.js'
 import { Redirect, Link } from 'react-router-dom'
 
@@ -55,7 +55,7 @@ class Signup extends Component {
     console.log(json)
     if (json.jwt){
       setToken(json.jwt)
-      this.props.setUser(json.user)
+      this.props.getUser(json.user)
       this.setState({redirect: true})
     }else{
       this.setState({message: json.message})
@@ -122,7 +122,7 @@ class Signup extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUser: (user) => dispatch(setUser(user))
+    getUser: (user) => dispatch(getUser(user))
   }
 }
 
