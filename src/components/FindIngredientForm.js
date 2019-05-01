@@ -11,9 +11,11 @@ class FindIngredientForm extends Component{
   }
 
   handleChange = (ev) => {
-    this.setState({
-      [ev.target.name]: ev.target.value
-    })
+    if (/^[a-zA-Z ]+$/.test(ev.target.value)){
+      this.setState({
+        [ev.target.name]: ev.target.value
+      })
+    }
   }
 
   handleSubmit = (ev) => {
