@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { findIngredients } from '../Actions.js'
 
 class FindIngredientForm extends Component{
   constructor(props) {
@@ -16,6 +18,7 @@ class FindIngredientForm extends Component{
 
   handleSubmit = (ev) => {
     ev.preventDefault()
+    this.props.findIngredients(this.state.ingredient)
   }
 
   render() {
@@ -24,8 +27,8 @@ class FindIngredientForm extends Component{
         <div>
           <label>
             Search For ingredients
-            <input id="username"
-              name="username"
+            <input id="ingredient"
+              name="ingredient"
               type="text"
               value={this.state.ingredient}
               onChange={this.handleChange}/>
@@ -39,4 +42,10 @@ class FindIngredientForm extends Component{
   }
 }
 
-export default FindIngredientForm
+const mapDispatchToProps = dispatch => {
+  return {
+    findIngredients: searchString => dispatch(findIngredients(searchString))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(FindIngredientForm)

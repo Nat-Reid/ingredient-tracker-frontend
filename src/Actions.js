@@ -37,7 +37,7 @@ export const getUserIngredients = () => {
   };
 }
 
-export const findIngredient = (searchString) => {
+export const findIngredients = (searchString) => {
   return (dispatch) => {
     dispatch({type: 'START_INGREDIENT_REQUEST'})
     return jwtFetch("GET",`find-ingredients/${searchString}`, ingredients => dispatch({type: 'SET_INGREDIENTS', payload: ingredients}))
