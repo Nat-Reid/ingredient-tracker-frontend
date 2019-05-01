@@ -30,6 +30,7 @@ class Login extends Component {
   }
 
   handleLogin = ({username, password}) => {
+    console.log("login fetch")
     fetch(`http://localhost:3000/login`, {
       method: 'POST',
     	headers: {

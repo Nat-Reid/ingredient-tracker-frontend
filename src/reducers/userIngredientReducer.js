@@ -8,6 +8,9 @@ const userIngredientReducer = (state = initialState, action) => {
       return {...state, userIngredients: action.payload}
     case 'START_USER_INGREDIENT_REQUEST':
       return {...state, userIngredients: []}
+    case 'ADD_USER_INGREDIENT':
+      return {...state,
+              userIngredients: state.userIngredients.concat(action.payload.user_ingredient)}
     default:
       return state
   }

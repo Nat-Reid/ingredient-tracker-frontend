@@ -10,6 +10,8 @@ const ingredientReducer = (state = initialState, action) => {
       return {...state, ingredients: []}
     case 'SELECT_INGREDIENT':
       return {...state, selectedIngredient: action.payload.id}
+    case 'CLEAR_INGREDIENTS':
+      return {...state, ingredients: [], selectedIngredient: null}
     default:
       return state
   }

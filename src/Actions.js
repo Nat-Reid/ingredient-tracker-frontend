@@ -1,16 +1,21 @@
 function handleErrors(response) {
     if (!response.ok) {
-        throw Error(response.message);
+      console.log("BAD RESPONSE", response)
+      throw Error(response.message);
     }
     return response;
 }
 
-function jwtFetch(method, endpoint, callback){
+function jwtFetch(method, endpoint, callback, body){
+  console.log("FETCHING SOETHING")
   return fetch(`http://localhost:3000/${endpoint}`, {
     method,
     headers: {
-      Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`
-    }
+      Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify(body)
   })
   .then(handleErrors)
   .then(response => {
@@ -57,5 +62,19 @@ export const deleteUserIngredient = id => {
 export const selectIngredient = ingredient => {
   return (dispatch) => {
     dispatch({type: "SELECT_INGREDIENT", payload: ingredient})
+  }
+}
+
+export const addUserIngredient = (expiration_date, quantity) => {
+  return (dispatch, getState) => {
+    let id = getState().ingredientReducer.selectedIngredient
+    jwtFetch("POST","user_ingredients",json => dispatch({type: "ADD_USER_INGREDIENT", payload: json}),{user_ingredient: {ingredient_id: id,quantity,expiration_date}})
+  }
+  // {user_ingredient: {id, expiration_date, name, quantity}}
+}
+
+export const clearIngredients = () =>{
+  return (dispatch) => {
+    dispatch({type: "CLEAR_INGREDIENTS"})
   }
 }
