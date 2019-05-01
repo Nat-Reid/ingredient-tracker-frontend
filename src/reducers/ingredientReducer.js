@@ -1,5 +1,5 @@
 const initialState = {
-  ingredients: []
+  ingredients: [], selectedIngredient: null
 }
 
 const ingredientReducer = (state = initialState, action) => {
@@ -8,6 +8,8 @@ const ingredientReducer = (state = initialState, action) => {
       return {...state, ingredients: action.payload}
     case 'START_INGREDIENT_REQUEST':
       return {...state, ingredients: []}
+    case 'SELECT_INGREDIENT':
+      return {...state, selectedIngredient: action.payload.id}
     default:
       return state
   }

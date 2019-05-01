@@ -6,26 +6,33 @@ class FindIngredientForm extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      ingredient: ''
+      ingredient: '',
+      message: ''
     } ;
   }
 
   handleChange = (ev) => {
-    if (/^[a-zA-Z ]+$/.test(ev.target.value)){
+    if (/^[a-zA-Z ]*$/.test(ev.target.value)){
       this.setState({
-        [ev.target.name]: ev.target.value
+        [ev.target.name]: ev.target.value.toLowerCase()
       })
     }
   }
 
   handleSubmit = (ev) => {
     ev.preventDefault()
-    this.props.findIngredients(this.state.ingredient)
+    if(this.state.ingredient.length >= 3){
+      this.setState({message: ""})
+      this.props.findIngredients(this.state.ingredient)
+    }else{
+      this.setState({message: "Must be at least 3 letters"})
+    }
   }
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <p style={{color: "red"}}>{this.state.message}</p>
         <div>
           <label>
             Search For ingredients

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FindIngredientForm from '../components/FindIngredientForm.js'
+import IngredientList from '../components/IngredientList.js'
 import { connect } from 'react-redux'
 
 class AddIngredientForm extends Component{
@@ -15,15 +16,12 @@ class AddIngredientForm extends Component{
     return (
       <div>
         <FindIngredientForm />
-        Add Ingredients form
-        {console.log(this.props.ingredients)}
+        <div>
+          <IngredientList />
+        </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ingredientReducer}) => {
-  return {...ingredientReducer}
-}
-
-export default connect(mapStateToProps)(AddIngredientForm)
+export default AddIngredientForm

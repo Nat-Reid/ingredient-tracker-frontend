@@ -16,6 +16,10 @@ function jwtFetch(method, endpoint, callback){
   .then(response => {
     return response.json()
   })
+  .then(json => {
+    console.log("Fetch Response From",endpoint, ":",json)
+    return json
+  })
   .then(callback)
   .catch(console.log)
 }
@@ -47,5 +51,11 @@ export const findIngredients = (searchString) => {
 export const deleteUserIngredient = id => {
   return (dispatch) => {
     return jwtFetch("DELETE",`user_ingredients/${id}`, ({id}) => dispatch({type: 'DELETE_USER_INGREDIENT', payload: id}))
+  }
+}
+
+export const selectIngredient = ingredient => {
+  return (dispatch) => {
+    dispatch({type: "SELECT_INGREDIENT", payload: ingredient})
   }
 }
