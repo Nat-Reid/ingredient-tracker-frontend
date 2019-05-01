@@ -1,18 +1,18 @@
 import React from 'react';
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { getUser } from './index.js'
+import { setUser, setUserIngredients } from './Actions.js'
+import { deleteToken } from './index.js'
 
 import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Home from './containers/Home'
+import AddIngredients from './containers/AddIngredients'
 
 class App extends Component{
-  componentDidMount(){
-    if (!this.props.user && localStorage.getItem("IngredientTrackerToken")){
-      getUser()
-    }
+  componentDidMount() {
+    this.props.setUser()
   }
 
   protectedPath(component){
@@ -33,12 +33,14 @@ class App extends Component{
   render(){
     return (
       <Router>
+        <Link to='/login' onClick={deleteToken}>Sign Out</Link>
         <div>
           <Switch>
             <Route exact path="/" component={() => !this.props.user ? <Redirect to="/login"/> : <Redirect to="/home"/>} />
             <Route path="/signup" component={Signup}/>
             <Route path="/login" component={Login}/>
             <Route path="/home" component={() => this.protectedPath(<Home/>)}/>
+            <Route path="/addIngredients" component={() => this.protectedPath(<AddIngredients/>)}/>
           </Switch>
         </div>
       </Router>
@@ -50,11 +52,13 @@ class App extends Component{
 const mapStateToProps = ({userReducer}) => {
   return {...userReducer}
 }
-//
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     setUser: (user) => dispatch(setUser(user))
-//   }
-// }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = dispatch => {
+  console.log(dispatch)
+  return {
+    setUser: () => dispatch(setUser()),
+    setUserIngredients: () => dispatch(setUserIngredients())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)
