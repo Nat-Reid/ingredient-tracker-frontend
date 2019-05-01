@@ -6,8 +6,8 @@ const userReducer = (state = initialState, action) => {
   switch(action.type){
     case 'SET_USER':
       return {...state, user: action.payload}
-    case 'START_USER_INGREDIENT_REQUEST':
-      return {...state, user: {name: null, username: null}}
+    // case 'START_USER_INGREDIENT_REQUEST':
+    //   return {...state, user: null}
     default:
       return state
   }

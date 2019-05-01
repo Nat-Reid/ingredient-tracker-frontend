@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { getUser, getUserIngredients } from './Actions.js'
 import { deleteToken } from './index.js'
 
-import {Route, Link, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
+import {Route, Switch, Redirect, BrowserRouter as Router} from 'react-router-dom'
 import Login from './components/Login'
 import Signup from './components/Signup'
 import Home from './containers/Home'
@@ -33,7 +33,7 @@ class App extends Component{
   render(){
     return (
       <Router>
-        <Link to='/login' onClick={deleteToken}>Sign Out</Link>
+        <a href='/login' onClick={deleteToken}>Sign Out</a>{/*reloads page and gets rid of store */}
         <div>
           <Switch>
             <Route exact path="/" component={() => !this.props.user ? <Redirect to="/login"/> : <Redirect to="/home"/>} />
