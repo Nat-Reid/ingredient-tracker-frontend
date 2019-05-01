@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import IngredientCard from '../components/IngredientCard'
+import UserIngredientCard from '../components/UserIngredientCard'
 
-class IngredientList extends Component{
-  renderIngredients() {
+class UserIngredientList extends Component{
+  renderUserIngredients() {
     return this.props.userIngredients.map((userIngredient, index ) => {
-      return <IngredientCard {...userIngredient} key={index}/>
+      return <UserIngredientCard {...userIngredient} key={index}/>
     })
   }
 
@@ -15,7 +15,7 @@ class IngredientList extends Component{
       <div>
         I am your IngredientList
         <ul>
-          {this.renderIngredients()}
+          {this.renderUserIngredients()}
         </ul>
       </div>
     );
@@ -26,4 +26,4 @@ const mapStateToProps = ({userIngredientReducer}) => {
   return {...userIngredientReducer}
 }
 
-export default connect(mapStateToProps)(IngredientList)
+export default connect(mapStateToProps)(UserIngredientList)

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux'
 
-import IngredientList from './IngredientList.js'
+import UserIngredientList from './UserIngredientList.js'
 import MealForm from '../components/MealForm.js'
 
 const Home = props => {
   return (
     <div className="HomePage">
-      <IngredientList />
+      <UserIngredientList />
       <MealForm />
     </div>
     );

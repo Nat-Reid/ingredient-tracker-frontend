@@ -1,7 +1,7 @@
 import React from 'react';
 
-const IngredientCard = props => {
-  console.log("Ingredient Card props",props)
+const UserIngredientCard = props => {
+  console.log("UserIngredient Card props",props)
   return (
     <li>
       <div>
@@ -12,4 +12,4 @@ const IngredientCard = props => {
   );
 }
 
-export default IngredientCard
+export default UserIngredientCard
