@@ -1,14 +1,14 @@
-function handleErrors(response) {
+async function handleErrors(response) {
     if (!response.ok) {
-      console.log("BAD RESPONSE", response)
-      throw Error(response.message);
+      let error_message
+      await response.json().then(j => error_message = j.message);
+      throw Error(error_message)
     }
     return response;
 }
 
-function jwtFetch(method, endpoint, callback, body){
-  console.log("FETCHING SOETHING")
-  return fetch(`http://localhost:3000/${endpoint}`, {
+function configObj(method, body){
+  return {
     method,
     headers: {
       Authorization: `Bearer ${localStorage.getItem("IngredientTrackerToken")}`,
@@ -16,11 +16,14 @@ function jwtFetch(method, endpoint, callback, body){
       Accept: 'application/json'
     },
     body: JSON.stringify(body)
-  })
+  }
+}
+
+function jwtFetch(method, endpoint, callback, body){
+  console.log("FETCHING SOETHING")
+  return fetch(`http://localhost:3000/${endpoint}`, configObj(method,body))
   .then(handleErrors)
-  .then(response => {
-    return response.json()
-  })
+  .then(res => res.json())
   .then(json => {
     console.log("Fetch Response From",endpoint, ":",json)
     return json

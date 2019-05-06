@@ -17,7 +17,7 @@ class IngredientList extends Component{
 
   render() {
     return (
-      <ul>
+      <ul className="ingredient-search-list">
         {this.renderIngredients()}
       </ul>
     );

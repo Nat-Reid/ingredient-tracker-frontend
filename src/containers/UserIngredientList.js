@@ -12,7 +12,7 @@ class UserIngredientList extends Component{
   render() {
     console.log("ingredient list props", this.props)
     return (
-      <div>
+      <div className="user-ingredient-list">
         I am your IngredientList
         <ul>
           {this.renderUserIngredients()}

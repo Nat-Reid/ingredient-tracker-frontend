@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class MealForm extends Component{
   render() {
     return (
-      <div>meal form</div>
+      <div className="meal-form">meal form</div>
       // <form onSubmit={this.handleSubmit}>
       //   <div>
       //     <label>

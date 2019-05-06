@@ -31,7 +31,7 @@ class FindIngredientForm extends Component{
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
+      <form className="find-ingredients" onSubmit={this.handleSubmit}>
         <p style={{color: "red"}}>{this.state.message}</p>
         <div>
           <label>

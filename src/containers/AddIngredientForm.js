@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FindIngredientForm from '../components/FindIngredientForm.js'
-import IngredientList from '../components/IngredientList.js'
 import { connect } from 'react-redux'
 import { addUserIngredient, clearIngredients } from '../Actions.js'
 
@@ -23,12 +22,12 @@ class AddIngredientForm extends Component{
     ev.preventDefault();
     this.props.addUserIngredient(this.state.expirationDate,this.state.quantity)
     this.props.clearIngredients()
-    this.setState({expirationDate: new Date(),quantity: 0})
+    this.setState({expirationDate: new Date(), quantity: 0})
   }
 
   render() {
     return (
-      <div>
+      <div className="add-ingredient-form">
         <FindIngredientForm />
         <form onSubmit={this.handleSubmit}>
           <div>
@@ -53,9 +52,6 @@ class AddIngredientForm extends Component{
           </div>
           <button type="submit">Add Ingredient</button>
         </form>
-        <div>
-          <IngredientList />
-        </div>
       </div>
     );
   }

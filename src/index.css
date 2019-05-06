@@ -12,3 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+div {
+  color: green;
+}
+
+.home-page, .add-ingredients-page{
+  color:blue;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: 1fr
+}
+
+.user-ingredient-list{
+  height: 90vh;
+  overflow: scroll;
+  grid-column: 1
+}
+
+.add-ingredient-form, .meal-form{
+  grid-column: 2
+}
+
+.ingredient-search-list{
+  height: 90vh;
+  overflow: scroll;
+  grid-column: 3
+}
