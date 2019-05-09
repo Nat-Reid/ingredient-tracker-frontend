@@ -2,8 +2,7 @@ async function handleErrors(response) {
     if (!response.ok) {
       let error_message
       await response.json().then(j => error_message = j.message);
-      console.log("FETCH ERROR MESSAGE",response)
-      throw Error(error_message)
+      throw new Error(error_message)
     }
     return response;
 }
@@ -16,19 +15,19 @@ function configObj(method, body){
       'Content-Type': 'application/json',
       Accept: 'application/json'
     },
-    body: JSON.stringify(body)
+    body: JSON.stringify(body),
   }
 }
 
 function jwtFetch(method, endpoint, callback, body){
-  console.log("FETCHING FROM", endpoint)
+  // console.log("FETCHING FROM", endpoint)
   return fetch(`http://localhost:3000/${endpoint}`, configObj(method,body))
   .then(handleErrors)
   .then(res => res.json())
-  .then(json => {
-    console.log("Fetch Response From",endpoint, ":",json)
-    return json
-  })
+  // .then(json => {
+  //   console.log("Fetch Response From",endpoint, ":",json)
+  //   return json
+  // })
   .then(callback)
   .catch(console.log)
 }
@@ -51,9 +50,15 @@ export const getUserIngredients = () => {
 }
 
 export const generateRecipes = () => {
-  return (dispatch) => {
+  return (dispatch,getState) => {
     dispatch({type: 'START_RECIPE_REQUEST'})
-    return jwtFetch("GET","generate-recipes", json => dispatch({type: 'SET_RECIPES', payload: json}))
+    let selected_ingredient_ids = getState().userIngredientReducer.userIngredients
+    selected_ingredient_ids = selected_ingredient_ids.filter(ui => ui.selected)
+    selected_ingredient_ids = selected_ingredient_ids.map(ui => ui.id)
+
+    console.log("SELECTED INGREDIENT IDS", selected_ingredient_ids)
+
+    return jwtFetch("POST","generate-recipes", json => dispatch({type: 'SET_RECIPES', payload: json}),{selected_ingredient_ids})
     // [{name: "", expiration_date: ...}, {}, {}]
   };
 }

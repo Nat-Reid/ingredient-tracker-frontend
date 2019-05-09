@@ -17,6 +17,9 @@ const userIngredientReducer = (state = initialState, action) => {
     case 'ADD_USER_INGREDIENT':
       return {...state,
               userIngredients: state.userIngredients.concat(action.payload.user_ingredient)}
+    case 'DELETE_USER_INGREDIENT':
+      return {...state,
+              userIngredients: state.userIngredients.filter(ui => ui.id !== action.payload)}
     default:
       return state
   }

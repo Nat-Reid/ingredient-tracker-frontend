@@ -4,13 +4,17 @@ import UserIngredientCard from '../components/UserIngredientCard'
 
 class UserIngredientList extends Component{
   renderUserIngredients() {
+    this.props.userIngredients.sort((a,b) => {
+      let aTime = new Date(a.expiration_date).getTime()
+      let bTime = new Date(b.expiration_date).getTime()
+      return aTime > bTime ? 1 : aTime < bTime ? -1 : 0
+    })
     return this.props.userIngredients.map((userIngredient, index ) => {
       return <UserIngredientCard {...userIngredient} key={index}/>
     })
   }
 
   render() {
-    console.log("ingredient list props", this.props)
     return (
       <div className="user-ingredient-list">
         I am your IngredientList

@@ -54,7 +54,6 @@ const mapStateToProps = ({userReducer}) => {
 }
 
 const mapDispatchToProps = dispatch => {
-  console.log(dispatch)
   return {
     getUser: () => dispatch(getUser()),
     getUserIngredients: () => dispatch(getUserIngredients())

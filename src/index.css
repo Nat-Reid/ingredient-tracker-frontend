@@ -39,3 +39,24 @@ div {
   overflow: scroll;
   grid-column: 3
 }
+
+.expired{
+  color: red;
+}
+
+li div{
+  display: inline-block;
+}
+
+.selected{
+  outline: 2px solid purple;
+}
+
+.recipe-ingredient-list {
+  overflow: scroll;
+  height: 20vh;
+}
+
+.user-ingredient-div {
+  margin-right: 5px;
+}

@@ -10,7 +10,6 @@ class RecipeList extends Component{
   }
 
   render() {
-    console.log("ingredient list props", this.props)
     return (
       <div className="recipe-list">
         Recipes

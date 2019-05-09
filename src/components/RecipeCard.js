@@ -6,9 +6,20 @@ class RecipeCard extends Component{
     window.open(this.props.url)
   }
 
+  renderIngredients = () => {
+    return this.props.ingredients.map(ingredient => {
+      return <li>{ingredient.name}</li>
+    })
+  }
+
   render() {
     return (
-      <div><a onClick={this.handleLink} href={this.props.url}>{this.props.name}</a></div>
+      <div>
+        <a onClick={this.handleLink} href={this.props.url}>{this.props.name}</a>
+        <ul className="recipe-ingredient-list">
+          {this.renderIngredients()}
+        </ul>
+      </div>
     );
   }
 }
