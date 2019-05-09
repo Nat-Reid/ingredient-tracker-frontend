@@ -2,6 +2,7 @@ async function handleErrors(response) {
     if (!response.ok) {
       let error_message
       await response.json().then(j => error_message = j.message);
+      console.log("FETCH ERROR MESSAGE",response)
       throw Error(error_message)
     }
     return response;
@@ -20,7 +21,7 @@ function configObj(method, body){
 }
 
 function jwtFetch(method, endpoint, callback, body){
-  console.log("FETCHING SOETHING")
+  console.log("FETCHING FROM", endpoint)
   return fetch(`http://localhost:3000/${endpoint}`, configObj(method,body))
   .then(handleErrors)
   .then(res => res.json())
@@ -45,6 +46,14 @@ export const getUserIngredients = () => {
   return (dispatch) => {
     dispatch({type: 'START_USER_INGREDIENT_REQUEST'})
     return jwtFetch("GET","user_ingredients", json => dispatch({type: 'SET_USER_INGREDIENTS', payload: json}))
+    // [{name: "", expiration_date: ...}, {}, {}]
+  };
+}
+
+export const generateRecipes = () => {
+  return (dispatch) => {
+    dispatch({type: 'START_RECIPE_REQUEST'})
+    return jwtFetch("GET","generate-recipes", json => dispatch({type: 'SET_RECIPES', payload: json}))
     // [{name: "", expiration_date: ...}, {}, {}]
   };
 }

@@ -34,7 +34,7 @@ div {
   grid-column: 2
 }
 
-.ingredient-search-list{
+.ingredient-search-list, .recipe-list{
   height: 90vh;
   overflow: scroll;
   grid-column: 3
