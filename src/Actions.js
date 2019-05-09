@@ -77,6 +77,12 @@ export const selectIngredient = ingredient => {
   }
 }
 
+export const selectUserIngredient = id => {
+  return (dispatch) => {
+    dispatch({type:"TOGGLE_SELECT_USER_INGREDIENT", payload: id})
+  }
+}
+
 export const addUserIngredient = (expiration_date, quantity) => {
   return (dispatch, getState) => {
     let id = getState().ingredientReducer.selectedIngredient

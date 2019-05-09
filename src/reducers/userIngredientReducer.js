@@ -8,6 +8,12 @@ const userIngredientReducer = (state = initialState, action) => {
       return {...state, userIngredients: action.payload}
     case 'START_USER_INGREDIENT_REQUEST':
       return {...state, userIngredients: []}
+    case 'TOGGLE_SELECT_USER_INGREDIENT':
+      return {...state,
+              userIngredients: state.userIngredients.map(ui => {
+                return ui.id === action.payload ? {...ui, selected: !ui.selected} : ui
+              })
+            }
     case 'ADD_USER_INGREDIENT':
       return {...state,
               userIngredients: state.userIngredients.concat(action.payload.user_ingredient)}
