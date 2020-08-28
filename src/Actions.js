@@ -21,7 +21,7 @@ function configObj(method, body){
 
 function jwtFetch(method, endpoint, callback, body){
   // console.log("FETCHING FROM", endpoint)
-  return fetch(`http://localhost:3000/${endpoint}`, configObj(method,body))
+  return fetch(`http://localhost:3001/${endpoint}`, configObj(method,body))
   .then(handleErrors)
   .then(res => res.json())
   // .then(json => {
@@ -29,7 +29,7 @@ function jwtFetch(method, endpoint, callback, body){
   //   return json
   // })
   .then(callback)
-  .catch(console.log)
+  .catch(alert)
 }
 
 export const getUser = () => {

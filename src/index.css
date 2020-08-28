@@ -15,6 +15,7 @@ code {
 
 div {
   color: green;
+  font-family: sans-serif;
 }
 
 .home-page, .add-ingredients-page{
@@ -55,6 +56,7 @@ li div{
 .recipe-ingredient-list {
   overflow: scroll;
   height: 20vh;
+  outline: 1px solid black;
 }
 
 .user-ingredient-div {

@@ -17,7 +17,7 @@ class UserIngredientList extends Component{
   render() {
     return (
       <div className="user-ingredient-list">
-        I am your IngredientList
+        Select Ingredients you'd like to be in your meal
         <ul>
           {this.renderUserIngredients()}
         </ul>
